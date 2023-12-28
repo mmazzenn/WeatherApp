@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Weather</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Diphylleia&family=Montserrat:wght@300;400;500;600;700;800;900&family=Roboto:wght@300;400;500;700;900&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/all.min.css" />
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="icon" href="assets/logo.png" />
+</head>
+
+<body>
+  <!-- Start Navbar -->
+  <nav class="navbar navbar-expand-md fixed-top py-3">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center" href="#">
+        <img src="assets/logo.png" alt="Logo" class="logo" />
+        <span>Weather</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Live cameras</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Photos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- End Navbar -->
+
+  <!-- Start Home -->
+  <header class="home vh-100">
+    <div class="light"></div>
+    <div class="dark"></div>
+    <div class="container-fluid">
+      <div class="content d-flex flex-column justify-content-around">
+        <div class="time-content d-flex align-items-center">
+          <div class="time-country">
+            <p class="time"><span id="hours"></span><span id="minutes"></span><span id="seconds"></span><span
+                id="zone"></span></p>
+            <p class="country mb-0" id="homeCountry"></p>
+          </div>
+          <div class="icon position-relative" id="timeIcon">
+            <img src="assets/sun.png" alt="Time icon" class="w-100 position-absolute" />
+            <img src="assets/moon.png" alt="Time icon" class="w-100 position-absolute" />
+          </div>
+        </div>
+        <div class="intro text-center d-flex justify-content-center align-items-center flex-column">
+          <div class="intro-content">
+            <a href="#weather">
+              <p>Check the weather</p>
+              <span><i class="fa-solid fa-angles-down"></i></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- End Home -->
+
+  <!-- Start Weather -->
+  <section id="weather" class="weather position-relative">
+    <video loop muted autoplay id="lightVideo">
+      <source src="assets/videos/sunrise.mp4" type="video/mp4" />
+    </video>
+    <video loop muted autoplay id="nightVideo">
+      <source src="assets/videos/moonrise.mp4" type="video/mp4" />
+    </video>
+    <div class="container py-5">
+      <div class="search-box position-relative">
+        <form action="">
+          <input type="text" id="search" placeholder="Find your location..." class="form-control" />
+          <button class="btn position-absolute" id="searchBtn">Find</button>
+        </form>
+      </div>
+      <div class="row gy-4">
+        <div class="col-xl-4 col-lg-6 ">
+          <div class="box d-flex flex-column justify-content-center align-items-center">
+            <div class="date-day d-flex justify-content-between w-100 align-items-center weather-info">
+              <div class="day"></div>
+              <div class="date"></div>
+            </div>
+            <div class="location d-flex flex-column justify-content-center align-items-center w-100 text-center">
+              <div class="city weather-info w-100"></div>
+              <div class="continent-country weather-info w-100"></div>
+            </div>
+            <div class="condition d-flex justify-content-center align-items-center w-100 text-center">
+              <div class="condition-content d-flex flex-column justify-content-center align-items-center w-100">
+                <div class="icon w-50 weather-info rounded-circle iconImg">
+                </div>
+                <div class="status weather-info w-100"></div>
+                <div class="about-weather w-100 text-start">
+                  <div class="row gy-4">
+                    <div class="col-sm-6">
+                      <div class="temp d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/thermometer.png" alt="Thermometer" class="w-100" />
+                        </div>
+                        <div class="temp-desc">Feels like</div>
+                        <div class="temp-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="wind d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/wind.png" alt="Wind" class="w-100" />
+                        </div>
+                        <div><span class="wind-desc"></span>Wind</div>
+                        <div class="wind-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="humidity d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/humidity.png" alt="Humidity" class="w-100" />
+                        </div>
+                        <div class="humidity-desc">Humidity</div>
+                        <div class="humidity-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="uv d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/uv.png" alt="UV" class="w-100" />
+                        </div>
+                        <div class="uv-desc">UV</div>
+                        <div class="uv-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="visibility d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/visibility.png" alt="Visibility" class="w-100" />
+                        </div>
+                        <div class="visibility-desc">Visibility</div>
+                        <div class="visibility-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="pressure d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/pressure.png" alt="Pressure" class="w-100" />
+                        </div>
+                        <div class="pressure-desc">Air pressure</div>
+                        <div class="pressure-degree"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6">
+          <div class="box d-flex flex-column justify-content-center align-items-center">
+            <div class="date-day d-flex justify-content-center w-100 align-items-center weather-info">
+              <div class="day"></div>
+            </div>
+            <div class="condition d-flex justify-content-center align-items-center w-100 text-center">
+              <div class="condition-content d-flex flex-column justify-content-center align-items-center w-100">
+                <div class="icon w-50 weather-info rounded-circle iconImg">
+                </div>
+                <div class="status weather-info w-100"></div>
+                <div class="about-weather w-100 text-start">
+                  <div class="row gy-4">
+                    <div class="col-sm-6">
+                      <div class="temp d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/thermometer.png" alt="Thermometer" class="w-100" />
+                        </div>
+                        <div class="temp-desc">Feels like</div>
+                        <div class="temp-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="wind d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/wind.png" alt="Wind" class="w-100" />
+                        </div>
+                        <div><span class="wind-desc"></span>Wind</div>
+                        <div class="wind-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="humidity d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/humidity.png" alt="Humidity" class="w-100" />
+                        </div>
+                        <div class="humidity-desc">Humidity</div>
+                        <div class="humidity-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="uv d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/uv.png" alt="UV" class="w-100" />
+                        </div>
+                        <div class="uv-desc">UV</div>
+                        <div class="uv-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="visibility d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/visibility.png" alt="Visibility" class="w-100" />
+                        </div>
+                        <div class="visibility-desc">Visibility</div>
+                        <div class="visibility-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="pressure d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/pressure.png" alt="Pressure" class="w-100" />
+                        </div>
+                        <div class="pressure-desc">Air pressure</div>
+                        <div class="pressure-degree"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 mt-md-4 mx-md-auto">
+          <div class="box d-flex flex-column justify-content-center align-items-center">
+            <div class="date-day d-flex justify-content-center w-100 align-items-center weather-info">
+              <div class="day"></div>
+            </div>
+            <div class="condition d-flex justify-content-center align-items-center w-100 text-center">
+              <div class="condition-content d-flex flex-column justify-content-center align-items-center w-100">
+                <div class="icon w-50 weather-info rounded-circle iconImg">
+                </div>
+                <div class="status weather-info w-100"></div>
+                <div class="about-weather w-100 text-start">
+                  <div class="row gy-4">
+                    <div class="col-sm-6">
+                      <div class="temp d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/thermometer.png" alt="Thermometer" class="w-100" />
+                        </div>
+                        <div class="temp-desc">Feels like</div>
+                        <div class="temp-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="wind d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/wind.png" alt="Wind" class="w-100" />
+                        </div>
+                        <div><span class="wind-desc"></span>Wind</div>
+                        <div class="wind-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="humidity d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/humidity.png" alt="Humidity" class="w-100" />
+                        </div>
+                        <div class="humidity-desc">Humidity</div>
+                        <div class="humidity-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="uv d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/uv.png" alt="UV" class="w-100" />
+                        </div>
+                        <div class="uv-desc">UV</div>
+                        <div class="uv-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="visibility d-flex flex-column weather-info">
+                        <div class="weather-icon">
+                          <img src="assets/icons/visibility.png" alt="Visibility" class="w-100" />
+                        </div>
+                        <div class="visibility-desc">Visibility</div>
+                        <div class="visibility-degree"></div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="pressure d-flex flex-column weather-info">
+                        <div class="weather-icon icon-left">
+                          <img src="assets/icons/pressure.png" alt="Pressure" class="w-100" />
+                        </div>
+                        <div class="pressure-desc">Air pressure</div>
+                        <div class="pressure-degree"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- End Weather -->
+
+  <footer class="footer pt-5">
+    <div class="container pb-5">
+      <div class="row align-items-center">
+        <div class="col-md-6 mb-3 md-md-0">
+          <div class="search-box position-relative">
+            <form action="">
+              <input type="text" placeholder="Enter your email to subscribe..." class="form-control" />
+              <button class="btn position-absolute">Subscribe</button>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="social-links d-flex justify-content-center">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-google-plus-g"></i></a>
+            <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="text-center mb-0 py-3">&copy; Copyright Weather App. All Rights Reserved</p>
+  </footer>
+
+  <!-- Start Location -->
+  <div class="stop"></div>
+  <div class="location-box position-fixed start-50 top-0 translate-middle bg-light">
+    <div class="location-body mb-3 text-black">Weather app wants to access your location</div>
+    <div class="location-footer text-center">
+      <button class="btn btn-danger me-sm-3 mb-2" id="refuseLocation">Dismiss</button>
+      <button class="btn btn-success mb-2" id="acceptLocation">Agree</button>
+    </div>
+  </div>
+  <!-- End Location -->
+
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>
